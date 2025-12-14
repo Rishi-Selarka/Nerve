@@ -5,7 +5,7 @@ A high-performance monitoring and ops platform with a hybrid architecture design
 ## Architecture
 
 - **Go** - Fast, reliable monitoring agents
-- **Python** - AI/AIOps intelligence layer (future)
+- **Python** - AI/AIOps intelligence layer (FastAPI)
 - **Flutter** - Real-time mobile & web dashboards (future)
 - **Supabase** - Central data, auth, and realtime layer
 - **Railway** - Simple GitOps-based deployment
@@ -15,7 +15,7 @@ A high-performance monitoring and ops platform with a hybrid architecture design
 ```
 Nerve/
 ├── agent-go/          # Go monitoring agent (always-on service)
-├── backend-python/     # Python FastAPI + AIOps layer (future)
+├── backend-python/     # Python FastAPI + AIOps layer
 ├── app-flutter/        # Flutter mobile + web app (future)
 ├── infra/             # CI/CD, env notes, deployment metadata
 │   └── railway/       # Railway deployment configurations
@@ -47,12 +47,17 @@ See [agent-go/README.md](agent-go/README.md) for detailed documentation.
 - Server restart capabilities
 - Secure script execution
 
-### 🔄 Phase 4: Python Backend & AIOps (PLANNED)
+### ✅ Phase 4: Python Backend & AIOps (COMPLETE)
 
-- Anomaly detection
-- Failure prediction
-- Trend analysis
-- Alert classification
+Python FastAPI backend providing AIOps intelligence:
+- **Anomaly Detection** - Identifies unusual latency patterns and status code anomalies using IQR method
+- **Failure Prediction** - ML-based risk scoring with confidence levels and risk factors
+- **Trend Analysis** - Analyzes latency/uptime trends, calculates P95/P99 metrics
+- **Alert Classification** - Categorizes alerts by severity (critical/high/medium/low) and type
+- **REST API** - Full FastAPI endpoints for accessing insights
+- **Background Workers** - Continuous analysis every 5 minutes
+
+See [backend-python/README.md](backend-python/README.md) for detailed documentation.
 
 ### 🔄 Phase 5: Scale & Polish (PLANNED)
 
@@ -65,6 +70,7 @@ See [agent-go/README.md](agent-go/README.md) for detailed documentation.
 ## Prerequisites
 
 - **Go 1.21+** - For the monitoring agent
+- **Python 3.9+** - For the AIOps backend
 - **Supabase Account** - Database and realtime backend
 - **Railway Account** - For deployment (optional, can run locally)
 - **Git** - Version control
@@ -105,6 +111,23 @@ See the project context document for the exact schema.
    go build -o nerve-agent
    ./nerve-agent
    ```
+
+4. **Run the Python AIOps backend:**
+   ```bash
+   cd backend-python
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   cp ../.env .env  # Add your Supabase credentials
+   python main.py
+   ```
+
+   Or with uvicorn:
+   ```bash
+   uvicorn main:app --reload --host 0.0.0.0 --port 8000
+   ```
+
+   Visit http://localhost:8000/docs for API documentation.
 
 ### 3. Railway Deployment
 
@@ -191,4 +214,15 @@ This is a private project. Development follows the phased roadmap outlined in `n
 
 For issues or questions, please refer to the individual component READMEs:
 - [agent-go/README.md](agent-go/README.md) - Go agent documentation
+- [backend-python/README.md](backend-python/README.md) - Python AIOps backend documentation
+
+## API Endpoints (Python Backend)
+
+Once the Python backend is running, access:
+- **Swagger UI**: http://localhost:8000/docs
+- **Health Check**: http://localhost:8000/health
+- **Predictions**: http://localhost:8000/api/predictions
+- **Trends**: http://localhost:8000/api/trends
+- **Alerts**: http://localhost:8000/api/alerts
+- **Monitors**: http://localhost:8000/api/monitors
 
