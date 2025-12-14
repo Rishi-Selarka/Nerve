@@ -1,0 +1,19 @@
+[phases.setup]
+nixPkgs = ["go"]
+
+[phases.install]
+cmds = [
+  "cd agent-go",
+  "go mod download",
+  "go build -o nerve-agent"
+]
+
+[phases.build]
+cmds = [
+  "cd agent-go",
+  "go build -o nerve-agent"
+]
+
+[start]
+cmd = "cd agent-go && ./nerve-agent"
+

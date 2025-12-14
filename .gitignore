@@ -1,0 +1,66 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+dist/
+build/
+
+# Go
+agent-go/nerve-agent
+agent-go/nerve-agent.exe
+agent-go/*.test
+agent-go/*.out
+agent-go/vendor/
+
+# Python
+backend-python/__pycache__/
+backend-python/*.py[cod]
+backend-python/*$py.class
+backend-python/*.so
+backend-python/.Python
+backend-python/env/
+backend-python/venv/
+backend-python/ENV/
+backend-python/.venv
+backend-python/*.egg-info/
+backend-python/dist/
+backend-python/build/
+
+# Flutter
+app-flutter/.dart_tool/
+app-flutter/.flutter-plugins
+app-flutter/.flutter-plugins-dependencies
+app-flutter/.packages
+app-flutter/.pub-cache/
+app-flutter/.pub/
+app-flutter/build/
+app-flutter/.ios/
+app-flutter/.android/
+app-flutter/*.iml
+app-flutter/.idea/
+app-flutter/.vscode/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
